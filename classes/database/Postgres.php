@@ -181,9 +181,13 @@ class Postgres extends ADODB_base {
 	 * @return The cleaned string
 	 */
 	function clean(&$str) {
+		global $data;
+		$conn = $data->conn->_connectionID;
+
 		if ($str === null) return null;
 		$str = str_replace("\r\n","\n",$str);
-		$str = pg_escape_string($str);
+
+		$str = pg_escape_string($conn, $str);
 		return $str;
 	}
 
@@ -217,9 +221,12 @@ class Postgres extends ADODB_base {
 	 * @return The cleaned array
 	 */
 	function arrayClean(&$arr) {
+		global $data;
+		$conn = $data->conn->_connectionID;
+
 		foreach ($arr as $k => $v) {
 			if ($v === null) continue;
-			$arr[$k] = pg_escape_string($v);
+			$arr[$k] = pg_escape_string($conn, $v);
 		}
 		return $arr;
 	}

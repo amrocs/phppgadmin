@@ -91,6 +91,8 @@ function value_url(&$var, &$fields) {
 
 class Decorator
 {
+	private $v;
+
 	function __construct($value) {
 		$this->v = $value;
 	}
@@ -102,6 +104,9 @@ class Decorator
 
 class FieldDecorator extends Decorator
 {
+	private $f;
+	private $d;
+
 	function __construct($fieldName, $default = null) {
 		$this->f = $fieldName;
 		if ($default !== null) $this->d = $default;
@@ -114,6 +119,8 @@ class FieldDecorator extends Decorator
 
 class ArrayMergeDecorator extends Decorator
 {
+	private $m;
+
 	function __construct($arrays) {
 		$this->m = $arrays;
 	}
@@ -129,6 +136,8 @@ class ArrayMergeDecorator extends Decorator
 
 class ConcatDecorator extends Decorator
 {
+	private $c;
+
 	function __construct($values) {
 		$this->c = $values;
 	}
@@ -144,6 +153,9 @@ class ConcatDecorator extends Decorator
 
 class CallbackDecorator extends Decorator
 {
+	private $fn;
+	private $p;
+
 	function __construct($callback, $param = null) {
 		$this->fn = $callback;
 		$this->p = $param;
@@ -156,6 +168,10 @@ class CallbackDecorator extends Decorator
 
 class IfEmptyDecorator extends Decorator
 {
+	private $v;
+	private $e;
+	private $f;
+
 	function __construct($value, $empty, $full = null) {
 		$this->v = $value;
 		$this->e = $empty;
@@ -173,6 +189,9 @@ class IfEmptyDecorator extends Decorator
 
 class UrlDecorator extends Decorator
 {
+	private $b;
+	private $q;
+
 	function __construct($base, $queryVars = null) {
 		$this->b = $base;
 		if ($queryVars !== null)
@@ -199,6 +218,9 @@ class UrlDecorator extends Decorator
 
 class replaceDecorator extends Decorator
 {
+	private $s;
+	private $p;
+
 	function __construct($str, $params) {
 		$this->s = $str;
 		$this->p = $params;
